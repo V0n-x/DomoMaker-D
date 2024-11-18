@@ -96,6 +96,20 @@ const App = () => {
 
 const init = () => {
     const root = createRoot(document.getElementById('app'));
+
+    const delButtons = document.querySelectorAll('.domoFace');
+
+    delButtons.forEach((b) => {
+        b.addEventListener('click', (e) => {
+            e.preventDefault();
+            helper.sendDelete(
+                '/deleteDomo', 
+                { name: e.target.parentNode.querySelector('.domoName').value },
+                props.triggerReload)
+                ;
+        });
+    });
+
     root.render(<App />);
 }
 

@@ -28,6 +28,20 @@ const makeDomo = async (req, res) => {
   }
 };
 
+const delDomo = async (req, res) => {
+  const domoData = {
+    name: req.body.name,
+  };
+
+  try {
+    const toDelete = await Domo.find({ name: domoData.name });
+    await Domo.deleteOne({ name: domoData.name });
+    return res.status(201).json({ status: `Deleted Domo ${toDelete.name}` });
+  } catch (err) {
+    return res.status(500).json({ error: 'An error occurred deleting domo!' });
+};
+};
+
 const getDomos = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
@@ -43,5 +57,6 @@ const getDomos = async (req, res) => {
 module.exports = {
   makerPage,
   makeDomo,
+  delDomo,
   getDomos,
 };
