@@ -1,6 +1,7 @@
 const helper = require('./helper.js');
 const React = require('react');
 const ReactDOM = require('react-dom');
+const { createRoot } = require('react-dom/client');
 
 const handleLogin = (e) => {
     e.preventDefault();
@@ -82,19 +83,21 @@ const init = () => {
     const loginButton = document.querySelector('#loginButton');
     const signupButton = document.querySelector('#signupButton');
 
+    const root = createRoot(document.getElementById('content'));
+
     loginButton.addEventListener('click', (e) => {
         e.preventDefault();
-        ReactDOM.render(<LoginWindow/>, document.querySelector('#content'));
+        root.render(<LoginWindow />);
         return false;
     });
 
     signupButton.addEventListener('click', (e) => {
         e.preventDefault();
-        ReactDOM.render(<SignupWindow/>, document.querySelector('#content'));
+        root.render(<SignupWindow />);
         return false;
     });
 
-    ReactDOM.render(<LoginWindow/>, document.querySelector('#content'));
+    root.render( <LoginWindow /> )
 }
 
 window.onload = init;
